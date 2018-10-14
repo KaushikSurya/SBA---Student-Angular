@@ -1,0 +1,65 @@
+<div class="container mt-5">
+  <div id="sort" style="display:inline;">
+    <h2 class="mb-5 ml-5 mr-3" style="float:left;">
+      <fa name="users"></fa>Students List
+    </h2>
+    <form class="form-inline" style="float:right;">
+      <div class="input-group-prepend">
+        <label><strong>Sort By </strong>&nbsp; </label>
+      </div>
+      <button (click)="order()">
+        <fa name="sort-amount-desc"></fa>
+      </button>
+      <div class="btn-group">
+        <select name="sortby" [(ngModel)]="sortbyv">
+          <option value="branch">Branch</option>
+          <option value="name">Name</option>
+          <option value="cgpa">CGPA</option>
+          <option value="gender">Gender</option>
+          <option value="id">ID</option>
+        </select>
+      </div>
+      <button type="submit">
+        &nbsp;<fa name="random"></fa>
+      </button>
+    </form>
+  </div>
+  <div id="content" style="clear:both;">
+    <div class="alert alert-warning" *ngIf="!students || students.length==0">
+      <fa name="exclamation-triangle"></fa> Records could not be found or loaded
+    </div>
+
+    <div class="row" *ngIf="students && students.length>0">
+      <div class="col-lg-2 ml-3 mt-2 mb-2 mr-3" *ngFor="let s of students | sortby : sortbyv : isDesc">
+        <div class="card" (mouseover)="cf.hidden=false" (mouseleave)="cf.hidden=true" style="width: 200px;">
+          <img class="card-img-center" [src]="s.branch=='ECE'?ecelogo:(s.branch=='CSE'?cselogo:(s.branch=='MECH'?mechlogo:(s.branch=='CIVIL'?civillogo:(s.branch=='IT'?itlogo:eeelogo))))"
+            height="100px" />
+          <div class="card-body" [ngStyle]="{'background-color' : s.gender === 'MALE' ? '#cceeff' : s.gender === 'FEMALE' ? '#ffe9f3' : '#f2f2f2' }">
+            <h4 class="card-title" style="text-align: center;">University of Transylvania</h4>
+            <h5 style="text-align:center;">{{s.branch}}</h5>
+            <p class="card-text">
+              <br><strong>
+                <h5>{{s.name | adjustLength:15}}</h5>
+              </strong>
+              <strong>Attendance :</strong> {{s.attendance}}%
+              <br><strong>CGPA :</strong> {{s.cgpa}}
+            </p>
+          </div>
+          <div class="card-footer" hidden="true" #cf>
+            <div class="btn-group">
+              <a routerLink="/editStudent/{{s.id}}" class="btn" title="Edit">
+                <fa name="edit"></fa>
+              </a>
+              <a routerLink="/deleteStudent/{{s.id}}" class="btn" title="Delete">
+                <fa name="trash"></fa>
+              </a>
+              <a routerLink="/viewStudent/{{s.id}}" class="btn" title="View">
+                <fa name="user"></fa>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

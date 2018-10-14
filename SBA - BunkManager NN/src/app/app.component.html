@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" routerLink="/">
+    <img [src]="logoUrl" style="width:40px" /> {{title}}
+  </a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/listStudents">
+        <fa name="users"></fa>
+        List Students</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/addStudent">
+        <fa name="user-plus"></fa>
+        New Student</a>
+    </li>
+  </ul>
+
+  <form class="form-inline">
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="btn-group">
+              <button type="button" title="Name" class="btn btn-primary" 
+              (click)="doChangeField('name',srch)">
+                <fa name="graduation-cap"></fa>
+              </button>
+              <button type="button" title="Branch" class="btn btn-primary" 
+              (click)="doChangeField('branch',srch)">
+                <fa name="list"></fa>
+              </button>
+            
+            
+            </div>
+          </div>
+          <input type="text" name="srchValue" class="form-control" 
+          [(ngModel)]="srchValue"
+          required #srch placeholder="Name" />
+          <div class="input-group-prepend">
+            <button class="btn btn-primary" (click)="doSearch()">
+              <fa name="search"></fa>
+            </button>
+          </div>
+        </div>
+  </form>
+</nav>
+<router-outlet></router-outlet>

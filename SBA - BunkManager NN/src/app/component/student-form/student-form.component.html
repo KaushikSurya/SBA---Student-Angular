@@ -1,0 +1,192 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-sm-9 m-auto">
+      <h3 class="mb-5 mt-5">
+
+        <fa name="{{isEditing?'edit':'user-plus'}}"></fa>
+        {{isEditing?"Edit":"New"}} Student
+
+      </h3>
+
+      <form class="form" #f="ngForm" novalidate (ngSubmit)=" save()">
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="user"></fa>
+              </span>
+            </div>
+            <input type="number" class="form-control" id="id" name="id" required minlength="7" maxlength="15"
+              [(ngModel)]="student.id" #id=ngModel placeholder="Student Id" />
+          </div>
+          <div class="alert alert-danger" *ngIf="(id.errors && (id.touched || id.darty))">
+            <p *ngIf="(id.errors && (id.touched || id.darty))">Please see that Id is entered
+              <strong>
+                <span *ngIf="id.errors.required">is not left blank</span>
+                <span *ngIf="id.errors.minlength">contains atleast 7 digits</span>
+                <span *ngIf="id.errors.maxlength">contains atmost 15 digits</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="user"></fa>
+              </span>
+            </div>
+            <input type="text" class="form-control" id="name" name="name" required minlength="5" maxlength="40"
+              [(ngModel)]="student.name" #name=ngModel placeholder="Name" />
+          </div>
+          <div class="alert alert-danger" *ngIf="(name.errors && (name.touched || name.darty))">
+            <p *ngIf="(name.errors && (name.touched || name.darty))">Please see that Name
+              <strong>
+                <span *ngIf="name.errors.required">is not left blank</span>
+                <span *ngIf="name.errors.minlength">is atleast 5 chars in length</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="list"></fa>
+              </span>
+            </div>
+            <select name="branch" [(ngModel)]="student.branch" #branch=ngModel>
+              <option value="" selected="selected">----</option>
+              <option value="ECE">ECE</option>
+              <option value="CSE">CSE</option>
+              <option value="MECH">MECH</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="EEE">EEE</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+          <div class="alert alert-danger" *ngIf="branch.errors && (branch.touched || branch.darty)">
+            <p>Please see that Branch/Department
+              <strong>
+                <span *ngIf="branch.errors.required">is not left blank</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="calendar-check-o"></fa>
+              </span>
+            </div>
+            <input type="number" class="form-control" id="attendance" name="attendance" required [(ngModel)]="student.attendance"
+              #attendance=ngModel placeholder="Attendance" />
+          </div>
+          <div class="alert alert-danger" *ngIf="attendance.errors && (attendance.touched || attendance.darty)">
+            <p>Please see that attendace
+              <strong>
+                <span *ngIf="attendance.errors.required">is not left blank</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="mobile"></fa>
+              </span>
+            </div>
+            <input type="text" class="form-control" id="cgpa" name="cgpa" required [(ngModel)]="student.cgpa" #cgpa=ngModel
+              placeholder="CGPA" />
+          </div>
+          <div class="alert alert-danger" *ngIf="cgpa.errors && (cgpa.touched || cgpa.darty)">
+            <p>Please see that CGPA
+              <strong>
+                <span *ngIf="cgpa.errors.required">is not left blank</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <!--<div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="envelope"></fa>
+              </span>
+            </div>
+            <input type="email" class="form-control" id="emailId" name="emailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+              [(ngModel)]="student.emailId" #emailId=ngModel placeholder="email" />
+          </div>
+          <div class="alert alert-danger" *ngIf="emailId.errors && (emailId.touched || emailId.darty)">
+            <p>Please see that EmailId ID
+              <strong>
+                <span *ngIf="emailId.errors.required">is not left blank</span>
+                <span *ngIf="emailId.errors.pattern">is of correct format</span>
+              </strong>
+            </p>
+          </div>
+        </div>-->
+
+        <div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="user"></fa>
+              </span>
+            </div>
+            <div class="form-check-inline" style="margin-left:10px;">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="gender" value="MALE" required [(ngModel)]="student.gender"
+                  #gender=ngModel />MALE
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="gender" value="FEMALE" required [(ngModel)]="student.gender"
+                  #gender=ngModel />FEMALE
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="gender" value="OTHERS" required [(ngModel)]="student.gender"
+                  #gender=ngModel />OTHERS
+              </label>
+            </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="gender.invalid">
+            <p>Please see that Gender
+              <strong>is selected</strong>
+            </p>
+          </div>
+        </div>
+
+        <!--<div class="mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa name="calendar"></fa>
+              </span>
+            </div>
+            <input type="date" class="form-control" id="dob" name="dob" required [(ngModel)]="student.dob" #dob=ngModel />
+          </div>
+          <div class="alert alert-danger" *ngIf="dob.errors.required && (dob.touched || dob.dirty)">
+            <p>Please see that date of birth
+              <strong>is not left blank</strong>
+            </p>
+          </div>
+        </div>-->
+
+        <div>
+          <button class="btn btn-block btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
